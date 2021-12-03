@@ -1,0 +1,12 @@
+version: "3.9"
+x-logging: &default-logging
+  driver: json-file
+  options:
+    tag: "{{.Name}}"
+services:
+  app:
+    container_name: app
+    build: app
+    logging: *default-logging
+    ports:
+      - "8081:8081"

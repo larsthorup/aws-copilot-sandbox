@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  </head>
+  <body>
+    <label>
+      Enter name:
+      <input type="text" autofocus />
+    </label>
+    <button type="submit">OK</button>
+    <p></p>
+    <script>
+      document.querySelector('input').addEventListener('keypress', (event) => {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          document.querySelector('button').click();
+        }
+      });
+      document.querySelector('button').addEventListener('click', async (event) => {
+        event.preventDefault();
+        const name = document.querySelector('input').value;
+        console.log('input', name);
+        // const response = await fetch(`http://localhost:8080/greet?name=${encodeURIComponent(name)}`);
+        // const greeting = await response.text();
+        const greeting = "Hello there!";
+        document.querySelector('p').innerText = greeting;
+      });
+    </script>
+  </body>
+</html>
