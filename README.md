@@ -11,12 +11,10 @@ Workflows:
 - Local deploy
 - Live deploy
 
-## Prerequisites
+## Local prerequisites
 
 - Docker (Desktop)
 - (Git) Bash
-- AWS IAM account configured and selected in AWS_PROFILE
-- AWS Copilot CLI installed
 
 ## Local build and deploy
 
@@ -29,12 +27,18 @@ docker-compose up --build
 
 TODO
 
+## Live prerequisites
+
+- AWS IAM account configured and selected in AWS_PROFILE
+- AWS Copilot CLI installed
+- AWS Route53 domain (required for HTTPS, using xpqf.net below)
+
 ## Live build and deploy
 
 First time creation of infrastructure
 
 ```bash
-copilot app init greeter
+copilot app init greeter --domain xpqf.net
 copilot svc init --name app
 copilot svc init --name api
 copilot env init --name test --default-config --profile $AWS_PROFILE
@@ -44,8 +48,8 @@ Deploy latest code:
 
 ```bash
 sh build.sh test
-copilot svc deploy --name app --env test
 copilot svc deploy --name api --env test
+copilot svc deploy --name app --env test
 ```
 
 Monitor:
@@ -55,9 +59,14 @@ copilot svc logs --name app
 copilot svc logs --name api
 ```
 
+Destroy:
+
+```bash
+copilot app delete
+```
+
 ## TODO
 
-- DNS + HTTPS - https://github.com/kohidave/dns-and-lb-copilot-demo
 - Db
 - Migration for db
 - e2e test
