@@ -4,9 +4,19 @@ x-logging: &default-logging
   options:
     tag: "{{.Name}}"
 services:
+  db:
+    container_name: db
+    image: postgres
+    env_file: .env.local
+    volumes:
+      - ./db/init:/docker-entrypoint-initdb.d
+    logging: *default-logging
+    ports:
+      - "5432:5432"
   api:
     container_name: api
     build: api
+    env_file: .env.local
     logging: *default-logging
     ports:
       - "8080:8080"

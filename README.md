@@ -77,3 +77,5 @@ copilot app delete
 - CI/CD Pipeline
 - Dev (watch) mode for app
 - Dev (watch) mode for api
+- Dev (watch) mode for db
+- devcontainer.json for vscode
