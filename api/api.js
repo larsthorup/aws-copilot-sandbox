@@ -9,7 +9,7 @@ const corsOptions = {
 };
 const app = express();
 app.use(cors(corsOptions));
-app.get('/greet', async (req, res) => {
+app.get('/api/greet', async (req, res) => {
   try {
     const name = req.query['name'];
     const message = `Hello ${name}`;
@@ -18,6 +18,9 @@ app.get('/greet', async (req, res) => {
     console.error(err.message);
     res.status(500).send(err.message);
   }
+});
+app.get('/api/health', async (req, res) => {
+  res.send('ok');
 });
 
 app.listen(port, host);

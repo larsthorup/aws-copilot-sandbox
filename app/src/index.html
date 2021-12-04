@@ -23,7 +23,7 @@
         event.preventDefault();
         const name = document.querySelector('input').value;
         console.log('input', name);
-        const response = await fetch(`${baseUrl}/greet?name=${encodeURIComponent(name)}`);
+        const response = await fetch(`${baseUrl}/api/greet?name=${encodeURIComponent(name)}`);
         const greeting = await response.text();
         document.querySelector('p').innerText = greeting;
       });
