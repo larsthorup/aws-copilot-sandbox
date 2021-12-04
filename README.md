@@ -23,6 +23,8 @@ sh build.sh local
 docker-compose up --build
 ```
 
+Open http://localhost:8081/
+
 ## Local watch
 
 TODO
@@ -51,6 +53,8 @@ sh build.sh test
 copilot svc deploy --name api --env test
 copilot svc deploy --name app --env test
 ```
+
+Open: https://greeter.xpqf.net/
 
 Monitor:
 
