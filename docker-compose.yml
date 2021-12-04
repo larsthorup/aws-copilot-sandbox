@@ -4,6 +4,12 @@ x-logging: &default-logging
   options:
     tag: "{{.Name}}"
 services:
+  api:
+    container_name: api
+    build: api
+    logging: *default-logging
+    ports:
+      - "8080:8080"
   app:
     container_name: app
     build: app

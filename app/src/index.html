@@ -12,6 +12,7 @@
     <button type="submit">OK</button>
     <p></p>
     <script>
+      const baseUrl = process.env.GREET_BASE_URL;
       document.querySelector('input').addEventListener('keypress', (event) => {
         if (event.keyCode === 13) {
           event.preventDefault();
@@ -22,9 +23,8 @@
         event.preventDefault();
         const name = document.querySelector('input').value;
         console.log('input', name);
-        // const response = await fetch(`http://localhost:8080/greet?name=${encodeURIComponent(name)}`);
-        // const greeting = await response.text();
-        const greeting = "Hello there!";
+        const response = await fetch(`${baseUrl}/greet?name=${encodeURIComponent(name)}`);
+        const greeting = await response.text();
         document.querySelector('p').innerText = greeting;
       });
     </script>

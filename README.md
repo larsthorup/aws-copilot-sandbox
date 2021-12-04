@@ -17,13 +17,18 @@ Workflows:
 - AWS account configured and selected in AWS_PROFILE
 - AWS Copilot CLI
 
-## Local deploy
+## Local build and deploy
 
 ```bash
+sh build local
 docker-compose up --build
 ```
 
-## Live deploy
+## Local watch
+
+TODO
+
+## Live build and deploy
 
 First time creation of infrastructure
 
@@ -36,6 +41,7 @@ copilot svc init --name app --svc-type "Load Balanced Web Service" --dockerfile 
 Deploy latest code:
 
 ```bash
+sh build test
 copilot svc deploy --name app --env test
 ```
 
@@ -49,8 +55,7 @@ copilot svc logs --name app
 
 - Api
 - Db
-- Observability
+- Migration for db
+- CI/CD Pipeline
 - Dev (watch) mode for app
 - Dev (watch) mode for api
-- Live deploy
-- CI/CD Pipeline
