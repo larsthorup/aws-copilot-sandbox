@@ -35,9 +35,9 @@ First time creation of infrastructure
 
 ```bash
 copilot app init greeter
+copilot svc init --name app
+copilot svc init --name api
 copilot env init --name test --default-config --profile $AWS_PROFILE
-copilot svc init --name app --svc-type "Load Balanced Web Service" --dockerfile app/Dockerfile
-copilot svc init --name api --svc-type "Load Balanced Web Service" --dockerfile api/Dockerfile
 ```
 
 Deploy latest code:
@@ -52,6 +52,7 @@ Monitor:
 
 ```bash
 copilot svc logs --name app
+copilot svc logs --name api
 ```
 
 ## TODO
@@ -59,6 +60,7 @@ copilot svc logs --name app
 - DNS + HTTPS - https://github.com/kohidave/dns-and-lb-copilot-demo
 - Db
 - Migration for db
+- e2e test
 - CI/CD Pipeline
 - Dev (watch) mode for app
 - Dev (watch) mode for api
