@@ -4,30 +4,44 @@ Docker-based development environment and deployment pipeline
 
 Services:
 
-1. App (HTML front-end)
+- [x] DNS and certificate (HTTPS URL)
+- [x] App (HTML web UI)
+- [x] API (HTTP web service)
+- [x] DB (SQL database)
+- [ ] Secrets (AWS, DB)
 
 Workflows:
 
-- Local deploy
-- Live deploy
+- [x] Local deploy (Docker Compose)
+- [ ] Live deploy (AWS Copilot)
+- [ ] Sandbox deploy (Docker Swarm)
+- [ ] Live deploy (Kubernetes)
 
 ## Local prerequisites
 
 - Docker (Desktop)
 - (Git) Bash
 
-## Local build and deploy
+## Local dev and deploy with Docker Compose
 
 ```bash
 sh build.sh local
 docker-compose up --build
+docker-compose down
 ```
 
 Open http://localhost:8081/
 
-## Local watch
+TODO: watch mode
 
-TODO
+## Local deploy with Docker Swarm
+
+```bash
+docker swarm init
+docker build
+docker stack deploy --compose-file=docker-compose.yml greet
+docker stack rm greet
+```
 
 ## Live prerequisites
 
@@ -43,15 +57,16 @@ First time creation of infrastructure
 copilot app init greeter --domain xpqf.net
 copilot svc init --name app
 copilot svc init --name api
-copilot env init --name test --default-config --profile $AWS_PROFILE
+copilot storage init --name db --storage-type Aurora --workload api --engine PostgreSQL --initial-db postgres
+copilot env init --name live --default-config --profile $AWS_PROFILE
 ```
 
 Deploy latest code:
 
 ```bash
-sh build.sh test
-copilot svc deploy --name api --env test
-copilot svc deploy --name app --env test
+sh build.sh live
+copilot svc deploy --name api --env live
+copilot svc deploy --name app --env live
 ```
 
 Open: https://greeter.xpqf.net/
@@ -71,11 +86,18 @@ copilot app delete
 
 ## TODO
 
-- Db
+- port assignment for multiple stack instances on swarm
+- nginx for app instead of node:http-serve
+- DB for copilot
 - Migration for db
-- e2e test
+- linting of infrastructure code files
+- e2e test of deployment
+- live telemetry
 - CI/CD Pipeline
 - Dev (watch) mode for app
-- Dev (watch) mode for api
-- Dev (watch) mode for db
+- Dev (watch) mode for api (nodemon?)
+- Recreate db command
 - devcontainer.json for vscode
+- Metrics for build time / deploy time / watch CPU usage
+- Deploy to Docker Swarm
+- Deploy to Kubernetes

@@ -16,6 +16,7 @@ services:
   api:
     container_name: api
     build: api
+    image: xpqf_greeter_api
     env_file: .env.local
     logging: *default-logging
     ports:
@@ -23,6 +24,7 @@ services:
   app:
     container_name: app
     build: app
+    image: xpqf_greeter_app
     logging: *default-logging
     ports:
       - "8081:8081"
