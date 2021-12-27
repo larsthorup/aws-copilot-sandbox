@@ -2,11 +2,11 @@ const pgp = require('pg-promise')();
 const express = require('express');
 const cors = require('cors');
 
-const port = 8080;
+const port = 8081;
 const host = '0.0.0.0';
 
 const corsOptions = {
-  origin: 'http://localhost:8081',
+  origin: 'http://localhost:8080',
 };
 const app = express();
 app.use(cors(corsOptions));

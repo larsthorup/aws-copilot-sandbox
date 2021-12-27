@@ -9,5 +9,5 @@ COPY . .
 # Install dependencies
 RUN npm install
 
-EXPOSE 8080
+EXPOSE 8081
 CMD [ "node", "api.js" ]

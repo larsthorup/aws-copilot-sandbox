@@ -1,10 +1,3 @@
-FROM node:14
+FROM nginx
 
-# Create app directory
-WORKDIR /usr/src/app
-
-# Get app bundle
-COPY dist .
-
-EXPOSE 8081
-CMD [ "npx", "serve", "-p", "8081" ]
+COPY dist /usr/share/nginx/html
