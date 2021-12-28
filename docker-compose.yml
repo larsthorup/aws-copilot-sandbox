@@ -9,6 +9,7 @@ services:
   db:
     container_name: db
     image: postgres
+    command: -p ${POSTGRES_PORT}
     volumes:
       - ./db/init:/docker-entrypoint-initdb.d
     ports:

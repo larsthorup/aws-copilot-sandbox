@@ -37,5 +37,6 @@ app.get('/api/health', async (req, res) => {
   res.send('ok');
 });
 
-app.listen(port, host);
-console.log(`Running on http://${host}:${port}`);
+app.listen(port, host, () => {
+  console.log(`Running "${deployEnv}" on http://${host}:${port}`);
+});

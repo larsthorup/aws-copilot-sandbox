@@ -25,8 +25,8 @@ docker-compose up --build
 
 ## TODO
 
-- generate port for multiple stack instances on swarm
 - verify aws copilot
+- generate random port for multiple stack instances on swarm
 - api: use internal hostname for internal hosts (db)
 - traefik to route from host name to stack instance
 - Deploy to Docker Swarm

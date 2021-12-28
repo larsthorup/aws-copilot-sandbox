@@ -4,7 +4,7 @@ x-logging: &default-logging
   options:
     tag: "{{.Name}}"
 x-env-file:
-  env_file: &default-env-file .env.demo
+  env_file: &default-env-file swarm/temp/.env.${DEMO_ENV}
 networks:
   internal:
     driver: overlay # Note: same as default network, defined explicitly for readability
@@ -12,15 +12,13 @@ services:
   db:
     container_name: db
     image: postgres
+    command: -p ${POSTGRES_PORT}
     volumes:
       - ./db/init:/docker-entrypoint-initdb.d
     networks:
       - internal
     env_file: *default-env-file
     logging: *default-logging
-    # ports:
-    # Note: db is not made accessible in public environments
-    # - "${POSTGRES_PORT}:${POSTGRES_PORT}"
   api:
     container_name: api
     build: api
