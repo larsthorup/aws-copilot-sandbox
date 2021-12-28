@@ -12,13 +12,29 @@ const corsOptions = {
 const app = express();
 app.use(cors(corsOptions));
 
-const cn = {
-  host: process.env.POSTGRES_HOST,
-  port: process.env.POSTGRES_PORT,
-  database: process.env.POSTGRES_DB,
-  user: process.env.POSTGRES_USER,
-  password: process.env.POSTGRES_PASSWORD,
-};
+
+
+const cn = (() => {
+  if (process.env.DB_SECRET) {
+    const { username, host, dbname, password, port } = JSON.parse(process.env.DB_SECRET)
+    return {
+      host,
+      port,
+      database: dbname,
+      user: username,
+      password
+    };
+  } else {
+    return {
+      host: process.env.POSTGRES_HOST,
+      port: process.env.POSTGRES_PORT,
+      database: process.env.POSTGRES_DB,
+      user: process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD,
+    };
+  }
+})();
+console.log(cn);
 const db = pgp(cn);
 
 app.get('/api/greet', async (req, res) => {

@@ -2,12 +2,16 @@
 
 Docker-based development environment and deployment pipeline
 
-Services:
+Services of the application
+
+- [x] [App (HTML web UI)](./app/README.md)
+- [x] [API (HTTP web service)](./api/README.md)
+- [x] DB (SQL database)
+
+Supporting services
 
 - [x] DNS and certificate (HTTPS URL)
-- [x] [App (HTML web UI)](./app/README.md)
-- [x] API (HTTP web service)
-- [x] DB (SQL database)
+- [x] Network (IP address, port)
 - [x] Logs
 - [x] Secrets (AWS, DB)
 
@@ -15,9 +19,31 @@ Environments:
 
 - [x] local: [Local deploy (Docker Compose)](./compose/README.md)
 - [x] demo-local: [Local deploy (Docker Swarm)](./swarm/README.md)
+- [ ] demo-xyz: [Demo deploy (Docker Swarm)](./swarm/README.md)
+- [ ] live-local: Local deploy (Kubernetes)
+- [ ] live: Live deploy (Kubernetes)
 - [x] live: [Live deploy (AWS Copilot)](./copilot/README.md)
-- [ ] demo-xyz: [Sandbox deploy (Docker Swarm)](./swarm/README.md)
-- [ ] Live deploy (Kubernetes)
+
+Orchestrators:
+
+- [ ] Physical hardware (no containerization)
+- [ ] Single docker image
+- [x] Docker Compose
+- [x] Docker Swarm
+- [ ] Kubernetes
+- [x] AWS Copilot
+
+Hosting providers:
+
+- [ ] On premise
+- [x] AWS
+- [ ] Google
+- [ ] Azure
+
+Scripting language:
+
+- [x] Bash
+- [ ] Terraform
 
 ```bash
 docker-compose up --build
@@ -25,7 +51,6 @@ docker-compose up --build
 
 ## TODO
 
-- verify aws copilot
 - generate random port for multiple stack instances on swarm
 - api: use internal hostname for internal hosts (db)
 - traefik to route from host name to stack instance

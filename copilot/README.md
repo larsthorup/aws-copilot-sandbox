@@ -22,10 +22,11 @@ copilot env init --name live --default-config --profile $AWS_PROFILE
 Deploy latest code:
 
 ```bash
-sh build.sh live
 copilot svc deploy --name api --env live
 copilot svc deploy --name app --env live
 ```
+
+- TODO: Migrate db (from a separate workload, pipeline)
 
 Open: https://greeter.xpqf.net/
 

@@ -29,7 +29,10 @@ exec: true # Enable running commands in your container.
 
 # Optional fields for more advanced use-cases.
 #
-#variables:                    # Pass environment variables as key value pairs.
+variables: # Pass environment variables as key value pairs.
+  DEPLOY_ENV: live
+  APP_ORIGIN: https://greeter.xpqf.net
+  API_PORT: 8081
 #  LOG_LEVEL: info
 
 #secrets:                      # Pass secrets from AWS Systems Manager (SSM) Parameter Store.
