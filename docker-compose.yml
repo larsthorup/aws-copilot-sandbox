@@ -4,7 +4,7 @@ x-logging: &default-logging
   options:
     tag: "{{.Name}}"
 x-env-file:
-  env_file: &default-env-file .env.local
+  env_file: &default-env-file .env
 services:
   db:
     container_name: db

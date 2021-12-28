@@ -2,11 +2,12 @@ const pgp = require('pg-promise')();
 const express = require('express');
 const cors = require('cors');
 
-const port = 8081;
 const host = '0.0.0.0';
+const port = process.env.API_PORT;
+const deployEnv = process.env.DEPLOY_ENV;
 
 const corsOptions = {
-  // origin: 'http://localhost:8080', // TODO: pass in origin of environment
+  origin: process.env.APP_ORIGIN,
 };
 const app = express();
 app.use(cors(corsOptions));
@@ -24,7 +25,7 @@ app.get('/api/greet', async (req, res) => {
   try {
     const name = req.query['name'];
     const { greeting } = await db.one("select * from greeting where id = 1");
-    const message = `${greeting} ${name}`;
+    const message = `From ${deployEnv}: ${greeting} ${name}`;
     console.log({ message });
     res.send(message);
   } catch (err) {

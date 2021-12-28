@@ -8,8 +8,8 @@
 ## Local dev and deploy with Docker Compose
 
 ```bash
-docker-compose --env-file .env.local up --build
-docker-compose --env-file .env.local down
+docker-compose up --build
+docker-compose down
 ```
 
 Open http://localhost:8080/

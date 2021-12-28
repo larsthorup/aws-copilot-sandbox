@@ -25,8 +25,8 @@ docker-compose up --build
 
 ## TODO
 
-- api: inject external port numbers (random/assigned) and external hostname (derived from environment name)
 - generate port for multiple stack instances on swarm
+- verify aws copilot
 - api: use internal hostname for internal hosts (db)
 - traefik to route from host name to stack instance
 - Deploy to Docker Swarm
@@ -34,7 +34,6 @@ docker-compose up --build
 - prettify: sh, Dockerfile, yaml
 - linting of infrastructure code files (docker-compose config)
 - e2e test of deployment
-- avoid the need for specifying DEPLOY_ENV in .env-file
 - DB for copilot
 - Migration for db
 - live telemetry
@@ -43,5 +42,6 @@ docker-compose up --build
 - Recreate db command
 - devcontainer.json for vscode
 - app: vite bundler
+- .env: remove duplication
 - Metrics for build time / deploy time / watch CPU usage
 - Deploy to Kubernetes
