@@ -10,7 +10,7 @@
 ```bash
 docker swarm init
 docker build
-docker stack deploy --compose-file=docker-compose.yml greet
+docker stack deploy -c greet.stack.yml greet
 docker stack list
 docker stack services greet
 docker service greet_api logs

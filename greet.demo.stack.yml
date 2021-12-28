@@ -4,21 +4,28 @@ x-logging: &default-logging
   options:
     tag: "{{.Name}}"
 x-env-file:
-  env_file: &default-env-file .env.local
+  env_file: &default-env-file .env.demo
+networks:
+  internal:
+    driver: overlay # Note: same as default network, defined explicitly for readability
 services:
   db:
     container_name: db
     image: postgres
     volumes:
       - ./db/init:/docker-entrypoint-initdb.d
-    ports:
-      - "5432:5432"
+    networks:
+      - internal
     env_file: *default-env-file
     logging: *default-logging
+    # ports:
+    #   - "5432:5432" # Note: db is not made accessible in public environments
   api:
     container_name: api
     build: api
     image: xpqf_greeter_api
+    networks:
+      - internal
     ports:
       - "8081:8081"
     env_file: *default-env-file
@@ -27,6 +34,8 @@ services:
     container_name: app
     build: app
     image: xpqf_greeter_app
+    networks:
+      - internal
     ports:
       - "8080:80"
     env_file: *default-env-file

@@ -11,8 +11,11 @@
     </label>
     <button type="submit">OK</button>
     <p></p>
+    <footer></footer>
     <script>
+      const deployEnv = process.env.DEPLOY_ENV;
       const baseUrl = process.env.GREET_BASE_URL;
+      document.querySelector('footer').innerText = `Greeter (${deployEnv})`;
       document.querySelector('input').addEventListener('keypress', (event) => {
         if (event.keyCode === 13) {
           event.preventDefault();

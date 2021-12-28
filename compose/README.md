@@ -8,7 +8,6 @@
 ## Local dev and deploy with Docker Compose
 
 ```bash
-sh build.sh local
 docker-compose up --build
 docker-compose down
 ```

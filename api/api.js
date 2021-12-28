@@ -6,7 +6,7 @@ const port = 8081;
 const host = '0.0.0.0';
 
 const corsOptions = {
-  origin: 'http://localhost:8080',
+  // origin: 'http://localhost:8080', // TODO: pass in origin of environment
 };
 const app = express();
 app.use(cors(corsOptions));

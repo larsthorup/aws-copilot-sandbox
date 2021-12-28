@@ -9,5 +9,6 @@ COPY . .
 # Install dependencies
 RUN npm install
 
+# TODO: inject port number
 EXPOSE 8081
-CMD [ "node", "api.js" ]
+CMD [ "npm", "start" ]
