@@ -12,7 +12,7 @@ services:
     volumes:
       - ./db/init:/docker-entrypoint-initdb.d
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
     env_file: *default-env-file
     logging: *default-logging
   api:
@@ -20,7 +20,7 @@ services:
     build: api
     image: xpqf_greeter_api
     ports:
-      - "8081:8081"
+      - "${API_PORT}:${API_PORT}"
     env_file: *default-env-file
     logging: *default-logging
   app:
@@ -28,6 +28,6 @@ services:
     build: app
     image: xpqf_greeter_app
     ports:
-      - "8080:80"
+      - "${APP_PORT}:80"
     env_file: *default-env-file
     logging: *default-logging

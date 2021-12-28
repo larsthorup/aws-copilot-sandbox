@@ -1,5 +1,5 @@
 {
-  "name": "aws-copilot-sandbox-api",
+  "name": "xpqf-greeter-api",
   "version": "1.0.0",
   "scripts": {
     "start": "node api.js"

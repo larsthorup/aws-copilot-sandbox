@@ -19,7 +19,8 @@ services:
     env_file: *default-env-file
     logging: *default-logging
     # ports:
-    #   - "5432:5432" # Note: db is not made accessible in public environments
+    # Note: db is not made accessible in public environments
+    # - "${POSTGRES_PORT}:${POSTGRES_PORT}"
   api:
     container_name: api
     build: api
@@ -27,7 +28,7 @@ services:
     networks:
       - internal
     ports:
-      - "8081:8081"
+      - "${API_PORT}:${API_PORT}"
     env_file: *default-env-file
     logging: *default-logging
   app:
@@ -37,6 +38,6 @@ services:
     networks:
       - internal
     ports:
-      - "8080:80"
+      - "${APP_PORT}:80"
     env_file: *default-env-file
     logging: *default-logging

@@ -1,4 +1,4 @@
-# aws-copilot-sandbox
+# docker-sandbox
 
 Docker-based development environment and deployment pipeline
 
@@ -25,9 +25,6 @@ docker-compose up --build
 
 ## TODO
 
-- yml: take port numbers from env vars
-- rename repo: docker-sandbox
-- avoid the need for specifying DEPLOY_ENV in .env-file
 - api: inject external port numbers (random/assigned) and external hostname (derived from environment name)
 - generate port for multiple stack instances on swarm
 - api: use internal hostname for internal hosts (db)
@@ -37,6 +34,7 @@ docker-compose up --build
 - prettify: sh, Dockerfile, yaml
 - linting of infrastructure code files (docker-compose config)
 - e2e test of deployment
+- avoid the need for specifying DEPLOY_ENV in .env-file
 - DB for copilot
 - Migration for db
 - live telemetry
