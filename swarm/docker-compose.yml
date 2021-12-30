@@ -12,7 +12,6 @@ networks:
     external: true
 services:
   db:
-    container_name: db
     image: postgres
     command: -p ${POSTGRES_PORT}
     volumes:
@@ -23,8 +22,6 @@ services:
     logging: *default-logging
 
   api:
-    container_name: api
-    build: api
     image: xpqf_greeter_api
     networks:
       - internal
@@ -39,8 +36,6 @@ services:
         - traefik.http.services.${STACK}_api.loadbalancer.server.port=${API_PORT}
         - "traefik.http.routers.${STACK}_api.rule=Host(`api.${STACK}.localhost`)"
   app:
-    container_name: app
-    build: app
     image: xpqf_greeter_app
     networks:
       - traefik-public

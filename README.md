@@ -55,25 +55,24 @@ docker-compose up --build
 
 ## TODO
 
-- swarm: get rid of warnings (unsupport "build", deprecated "container_name")
-- traefik to route tcp from `db.${STACK}.localhost` to service
-- traefik network - create in docker-compose
-- traefik https
-- deploy demo environments on cloud hosted docker swarm
-- CI/CD Pipeline (requires docker swarm host for review environments)
+- traefik: https
+- deploy demo environments on cloud hosted docker swarm on https://${STACK}.demo.greeter.xpqf.com
+- CI/CD Pipeline
+- e2e test of deployment
+- Dev (watch) mode for app
+- Dev (watch) mode for api (nodemon?)
+- traefik: route tcp from `db.${STACK}.localhost` to service
+- traefik: network - create in docker-compose
+- traefik: up.sh: wait until healthy
 - prettify: yaml
 - linting of infrastructure code files (docker-compose config)
   - https://github.com/replicatedhq/dockerfilelint
   - https://github.com/koalaman/shellcheck
-- e2e test of deployment
 - DB for copilot
 - Migration for db
 - live telemetry
-- Dev (watch) mode for app
-- Dev (watch) mode for api (nodemon?)
 - Recreate db command
 - devcontainer.json for vscode
 - app: vite bundler
-- .env: remove duplication
 - Metrics for build time / deploy time / watch CPU usage
 - Deploy to Kubernetes
