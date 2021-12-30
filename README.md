@@ -55,8 +55,8 @@ docker-compose up --build
 
 ## TODO
 
-- generate random port for multiple stack instances on swarm
-- swarm: shell scripts
+- swarm: shell scripts: `swarm/{up,down}`
+- swarm: get rid of warnings (unsupport "build", deprecated "container_name")
 - traefik to route tcp from `db.${STACK}.localhost` to service
 - traefik network - create in docker-compose
 - traefik https

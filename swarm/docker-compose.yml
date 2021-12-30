@@ -35,7 +35,7 @@ services:
       labels:
         - traefik.enable=true
         - traefik.constraint-label=traefik-public
-        - traefik.docker.network=traefik-public
+        - traefik.docker.network=traefik-public # ensure that traefik picks the right network of the two
         - traefik.http.services.${STACK}_api.loadbalancer.server.port=${API_PORT}
         - "traefik.http.routers.${STACK}_api.rule=Host(`api.${STACK}.localhost`)"
   app:
