@@ -16,8 +16,7 @@ docker service logs traefik_traefik
 
 ```bash
 docker-compose build
-(export STACK=greet && mkdir -p swarm/temp && echo "DEPLOY_ENV=${STACK}-demo" | cat - swarm/.env > swarm/temp/.env.${STACK} && echo "APP_ORIGIN=http://app.${STACK}.localhost" >> swarm/temp/.env.${STACK} && echo "API_ORIGIN=http://api.${STACK}.localhost" >> swarm/temp/.env.${STACK})
-(export STACK=greet && docker-compose --project-directory . --env-file swarm/temp/.env.${STACK} -f swarm/docker-compose.yml config > swarm/temp/${STACK}.docker-compose.yml && docker stack deploy --compose-file swarm/temp/${STACK}.docker-compose.yml ${STACK})
+swarm/up.sh greet
 docker stack list
 docker stack services greet
 docker service logs greet_api

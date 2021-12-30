@@ -46,7 +46,7 @@ Hosting providers:
 
 Scripting language:
 
-- [x] Bash
+- [x] Bash, YML, Dockerfile, .env
 - [ ] Terraform
 
 ```bash
@@ -55,7 +55,6 @@ docker-compose up --build
 
 ## TODO
 
-- swarm: shell scripts: `swarm/{up,down}`
 - swarm: get rid of warnings (unsupport "build", deprecated "container_name")
 - traefik to route tcp from `db.${STACK}.localhost` to service
 - traefik network - create in docker-compose
