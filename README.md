@@ -55,12 +55,12 @@ docker-compose up --build
 
 ## TODO
 
+- Dev (watch) mode for app
+- Dev (watch) mode for api (nodemon?)
 - traefik: https
 - deploy demo environments on cloud hosted docker swarm on https://${STACK}.demo.greeter.xpqf.com
 - CI/CD Pipeline
 - e2e test of deployment
-- Dev (watch) mode for app
-- Dev (watch) mode for api (nodemon?)
 - traefik: route tcp from `db.${STACK}.localhost` to service
 - traefik: network - create in docker-compose
 - traefik: up.sh: wait until healthy

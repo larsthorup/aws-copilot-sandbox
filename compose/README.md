@@ -12,6 +12,6 @@ docker-compose up --build
 docker-compose down
 ```
 
-Open http://localhost:8080/
+Open http://localhost:3000/
 
 TODO: watch mode
