@@ -2,6 +2,13 @@
 
 Docker-based development environment and deployment pipeline
 
+- [x] [Local deploy (Docker Compose)](./compose/README.md)
+- [x] [Local deploy (Docker Swarm)](./swarm/README.md)
+- [ ] [Demo deploy (Docker Swarm)](./swarm/README.md)
+- [ ] Local deploy (Kubernetes)
+- [ ] Live deploy (Kubernetes)
+- [x] [Live deploy (AWS Copilot)](./copilot/README.md)
+
 Services of the application
 
 - [x] [App (HTML web UI)](./app/README.md)
@@ -13,16 +20,13 @@ Supporting services
 - [x] DNS and certificate (HTTPS URL)
 - [x] Network (IP address, port)
 - [x] Logs
-- [x] Secrets (AWS, DB)
+- [ ] Secrets (hosting, certificate, db)
 
 Environments:
 
-- [x] local: [Local deploy (Docker Compose)](./compose/README.md)
-- [x] demo-local: [Local deploy (Docker Swarm)](./swarm/README.md)
-- [ ] demo-xyz: [Demo deploy (Docker Swarm)](./swarm/README.md)
-- [ ] live-local: Local deploy (Kubernetes)
-- [ ] live: Live deploy (Kubernetes)
-- [x] live: [Live deploy (AWS Copilot)](./copilot/README.md)
+- [x] local with watch
+- [x] demo
+- [x] live
 
 Orchestrators:
 
@@ -52,12 +56,16 @@ docker-compose up --build
 ## TODO
 
 - generate random port for multiple stack instances on swarm
-- api: use internal hostname for internal hosts (db)
-- traefik to route from host name to stack instance
-- Deploy to Docker Swarm
+- swarm: shell scripts
+- traefik to route tcp from `db.${STACK}.localhost` to service
+- traefik network - create in docker-compose
+- traefik https
+- deploy demo environments on cloud hosted docker swarm
 - CI/CD Pipeline (requires docker swarm host for review environments)
-- prettify: sh, Dockerfile, yaml
+- prettify: yaml
 - linting of infrastructure code files (docker-compose config)
+  - https://github.com/replicatedhq/dockerfilelint
+  - https://github.com/koalaman/shellcheck
 - e2e test of deployment
 - DB for copilot
 - Migration for db

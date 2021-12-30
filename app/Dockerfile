@@ -1,4 +1,4 @@
-FROM nginx
+FROM nginx:1.21
 
 # Create app directory
 WORKDIR /usr/src/app

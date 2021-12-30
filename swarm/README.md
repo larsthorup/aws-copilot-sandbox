@@ -7,20 +7,28 @@
 
 ```bash
 docker swarm init
+docker network create --driver=overlay traefik-public
+docker stack deploy -c swarm/traefik/docker-compose.yml traefik
+docker service logs traefik_traefik
 ```
 
 ## Build & deploy
 
 ```bash
 docker-compose build
-(export DEMO_ENV=greet && mkdir -p swarm/temp && echo "DEPLOY_ENV=${DEMO_ENV}-demo" | cat - swarm/.env.${DEMO_ENV} swarm/.env > swarm/temp/.env.${DEMO_ENV})
-(export DEMO_ENV=greet && docker-compose --project-directory . --env-file swarm/temp/.env.${DEMO_ENV} -f swarm/docker-compose.yml config | docker stack deploy --compose-file - ${DEMO_ENV})
+(export STACK=greet && mkdir -p swarm/temp && echo "DEPLOY_ENV=${STACK}-demo" | cat - swarm/.env.${STACK} swarm/.env > swarm/temp/.env.${STACK} && echo "APP_ORIGIN=http://app.${STACK}.localhost" >> swarm/temp/.env.${STACK} && echo "API_ORIGIN=http://api.${STACK}.localhost" >> swarm/temp/.env.${STACK})
+(export STACK=greet && docker-compose --project-directory . --env-file swarm/temp/.env.${STACK} -f swarm/docker-compose.yml config > swarm/temp/${STACK}.docker-compose.yml && docker stack deploy --compose-file swarm/temp/${STACK}.docker-compose.yml ${STACK})
 docker stack list
 docker stack services greet
-docker service greet_api logs
+docker service logs greet_api
 docker stack rm greet
 ```
 
 ## Notes
 
 - `services.db.ports` is deliberately not set on public environments
+- `services.*.depends_on` does not work when piping `config` to `stack`
+  - Open fix: https://github.com/docker/cli/issues/2365
+  - Workaround: https://github.com/docker/compose/issues/7773#issuecomment-886129165
+- traefik routes http from `{api,app}.${STACK}.localhost` to service
+- app uses `api.${STACK}.localhost` instead of explicit port
