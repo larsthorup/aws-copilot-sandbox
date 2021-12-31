@@ -55,9 +55,10 @@ docker-compose up --build
 
 ## TODO
 
-- deploy demo environments on cloud hosted docker swarm on https://${STACK}.demo.greeter.xpqf.com
+- deploy demo environments on cloud hosted docker swarm on https://${STACK}.demo.greeter.xpqf.net
   - https://dockerswarm.rocks/
   - https://jennapederson.com/blog/2021/6/21/provisioning-an-ec2-instance-with-cloudformation-part-1/
+- can we avoid a registry for demo environments?
 - watch mode for Docker
   - https://stackoverflow.com/questions/26050899/how-to-mount-host-volumes-into-docker-containers-in-dockerfile-during-build
   - https://vsupalov.com/rebuilding-docker-image-development/

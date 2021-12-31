@@ -6,7 +6,7 @@
 - AWS region configured in AWS_REGION (eu-central-1)
 - (Git) Bash
 - AWS CLI installed
-- AWS Route53 domain (required for HTTPS, using xpqf.net below)
+- AWS Route53 domain (required for HTTPS, using demo.greeter.xpqf.net below)
 
 Windows (Git Bash):
 
@@ -19,26 +19,38 @@ aws ec2 create-key-pair --key-name greet-ec2-key --query "KeyMaterial" --output 
 chmod 400 ~/.ssh/greet-ec2-key.pem
 # aws ec2 import-key-pair --key-name "greet-ec2-key" --public-key-material fileb://~/.ssh/id_rsa.pub
 aws ec2 describe-key-pairs
+aws ec2 delete-key-pair --key-name greet-ec2-key
+rm -rf ~/.ssh/greet-ec2-key.pem
 ```
 
-## Create instance
+## Create virtual machine with Ubuntu Linux
 
 ```bash
-aws cloudformation create-stack --stack-name greet-demo-ec2 --template-body file://ec2/ec2.cf.yml
+aws cloudformation create-stack --stack-name greet-demo-ec2 --template-body file://ec2/ec2.cfn.yml
 aws cloudformation describe-stacks --stack-name greet-demo-ec2
 aws cloudformation describe-stack-events --stack-name greet-demo-ec2
 aws cloudformation describe-stack-resources --stack-name greet-demo-ec2
 aws cloudformation wait stack-create-complete --stack-name greet-demo-ec2
+ssh -i ~/.ssh/greet-ec2-key.pem ubuntu@demo.greeter.xpqf.net "uname -a"
+sh ec2/set-hostname.sh ~/.ssh/greet-ec2-key.pem
+sh ec2/upgrade-packages.sh ~/.ssh/greet-ec2-key.pem
+```
 
-export GREET_DEMO_EC2_IP=$(aws cloudformation describe-stack-resource --stack-name greet-demo-ec2 --logical-resource-id GreetDemoEIP --query 'StackResourceDetail.PhysicalResourceId' --output text)
-ssh -i ~/.ssh/greet-ec2-key.pem ubuntu@${GREET_DEMO_EC2_IP}
+To delete the instance:
+
+```bash
+GREET_DEMO_STACK_ID=$(aws cloudformation describe-stacks --stack-name greet-demo-ec2 --query 'Stacks[0].StackId' --output text)
 aws cloudformation delete-stack --stack-name greet-demo-ec2
+aws cloudformation wait stack-delete-complete --stack-name ${GREET_DEMO_STACK_ID}
+```
+
+## Install Docker
+
+```bash
+sh ec2/install-docker.sh ~/.ssh/greet-ec2-key.pem
 ```
 
 ## TODO
 
-- DNS: CNAME demo.greeter.xpqf.com -> ${GREET_DEMO_EC2_IP}
-- hostname
-- update packages
-- install docker
-- enable docker swarm on public ip
+- Traefik
+- HTTPS

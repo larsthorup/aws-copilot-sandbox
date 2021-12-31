@@ -24,16 +24,6 @@ Parameters:
     Default: greet-ec2-key
 
 Resources:
-  GreetDemoInstance:
-    Type: AWS::EC2::Instance
-    Properties:
-      AvailabilityZone: !Ref AvailabilityZone
-      ImageId: !Ref AmiID
-      InstanceType: !Ref InstanceType
-      KeyName: !Ref KeyPairName
-      SecurityGroupIds:
-        - !Ref GreetDemoSecurityGroup
-
   GreetDemoSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -53,6 +43,16 @@ Resources:
           ToPort: 22
           CidrIp: 0.0.0.0/0
 
+  GreetDemoInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone: !Ref AvailabilityZone
+      ImageId: !Ref AmiID
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyPairName
+      SecurityGroupIds:
+        - !Ref GreetDemoSecurityGroup
+
   GreetDemoEIP:
     Type: AWS::EC2::EIP
     Properties:
@@ -61,6 +61,16 @@ Resources:
       Tags:
         - Key: Name
           Value: greet-demo-ec2-eip
+
+  GreetDemoDNS:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneName: xpqf.net.
+      Name: demo.greeter.xpqf.net.
+      Type: A
+      TTL: "900"
+      ResourceRecords:
+        - !Sub ${GreetDemoEIP}
 
 Outputs:
   WebsiteURL:
