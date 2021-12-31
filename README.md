@@ -65,7 +65,7 @@ docker-compose up --build
 
 ## TODO
 
-- traefik: route to dashboard from `traefik.${BASE_DOMAIN}`
+- swarm/local directory to distinguish between swarm/ec2
 - deploy demo environments on cloud hosted docker swarm on https://${STACK}.demo.greeter.xpqf.net
   - https://dockerswarm.rocks/
   - https://jennapederson.com/blog/2021/6/21/provisioning-an-ec2-instance-with-cloudformation-part-1/
@@ -80,7 +80,6 @@ docker-compose up --build
 - CI/CD Pipeline
 - e2e test of deployment
 - traefik: route tcp from `db.${STACK}.${BASE_DOMAIN}` to service
-- traefik: network - create in docker-compose
 - traefik: up.sh: wait until healthy
 - prettify: yaml
 - linting of infrastructure code files (docker-compose config)

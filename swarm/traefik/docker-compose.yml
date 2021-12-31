@@ -15,6 +15,7 @@ services:
       # Enable the Dashboard and API
       - --api
       - --api.insecure=true
+      - --entrypoints.web.address=:80
     networks:
       # Use the public network created to be shared between Traefik and
       # any other service that needs to be publicly available with HTTPS
@@ -22,12 +23,18 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      # Listen on port 8080 for the Traefik dashboard
-      - "8080:8080"
       # Listen on port 80, default for HTTP, necessary to redirect to HTTPS
       - target: 80
         published: 80
         mode: host
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.constraint-label=traefik-public"
+        - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+        - "traefik.http.routers.api.entrypoints=web"
+        - "traefik.http.routers.api.rule=Host(`traefik.localhost`)"
+        - "traefik.http.routers.api.service=api@internal"
 
 networks:
   # Use the previously created public network "traefik-public", shared with other
