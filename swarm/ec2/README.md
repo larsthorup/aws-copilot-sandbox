@@ -32,8 +32,8 @@ aws cloudformation describe-stack-events --stack-name greet-demo-ec2
 aws cloudformation describe-stack-resources --stack-name greet-demo-ec2
 aws cloudformation wait stack-create-complete --stack-name greet-demo-ec2
 ssh -i ~/.ssh/greet-ec2-key.pem ubuntu@demo.greeter.xpqf.net "uname -a"
-sh swarm/ec2/set-hostname.sh ~/.ssh/greet-ec2-key.pem
-sh swarm/ec2/upgrade-packages.sh ~/.ssh/greet-ec2-key.pem
+swarm/ec2/set-hostname.sh ~/.ssh/greet-ec2-key.pem
+swarm/ec2/upgrade-packages.sh ~/.ssh/greet-ec2-key.pem
 ```
 
 To delete the instance:
@@ -47,13 +47,13 @@ aws cloudformation wait stack-delete-complete --stack-name ${GREET_DEMO_STACK_ID
 ## Install Docker
 
 ```bash
-sh swarm/ec2/install-docker.sh ~/.ssh/greet-ec2-key.pem
+swarm/ec2/docker-up.sh ~/.ssh/greet-ec2-key.pem
 ```
 
 ## Install Traefik
 
 ```bash
-sh swarm/ec2/install-traefik.sh ~/.ssh/greet-ec2-key.pem
+swarm/ec2/traefik-up.sh ~/.ssh/greet-ec2-key.pem
 ```
 
 ## TODO

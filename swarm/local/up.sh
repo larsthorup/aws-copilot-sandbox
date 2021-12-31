@@ -4,9 +4,9 @@ export $(grep -v '^#' swarm/local/.env | xargs)
 export STACK="$1"
 APP_ORIGIN="http://app.${STACK}.${BASE_DOMAIN}"
 API_ORIGIN="http://api.${STACK}.${BASE_DOMAIN}"
-TEMP_DOTENV="swarm/temp/.env.${STACK}"
-TEMP_COMPOSE="swarm/temp/${STACK}.docker-compose.yml"
-mkdir -p swarm/temp
+TEMP_DOTENV="swarm/local/temp/.env.${STACK}"
+TEMP_COMPOSE="swarm/local/temp/${STACK}.docker-compose.yml"
+mkdir -p swarm/local/temp
 
 # Note: create .env file including dynamic info per stack
 cat swarm/.env > $TEMP_DOTENV

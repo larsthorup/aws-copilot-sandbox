@@ -62,11 +62,21 @@ Resources:
         - Key: Name
           Value: greet-demo-ec2-eip
 
-  GreetDemoDNS:
+  GreetDemoHostDNS:
     Type: AWS::Route53::RecordSet
     Properties:
       HostedZoneName: xpqf.net.
-      Name: demo.greeter.xpqf.net.
+      Name: "demo.greeter.xpqf.net."
+      Type: A
+      TTL: "900"
+      ResourceRecords:
+        - !Sub ${GreetDemoEIP}
+
+  GreetDemoTraefikDNS:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneName: xpqf.net.
+      Name: "*.demo.greeter.xpqf.net."
       Type: A
       TTL: "900"
       ResourceRecords:

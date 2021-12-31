@@ -2,15 +2,15 @@
 
 Docker-based development environment and deployment pipeline
 
-| environment | orchestrator | dns | https | app | api | db  |
-| ----------- | ------------ | --- | ----- | --- | --- | --- |
-| dev         | compose      | +   | -     |     |     |     |
-| local       | compose      | +   | -     | +   | +   | +   |
-| local       | swarm        | +   |       | +   | +   | +   |
-| demo        | swarm        |     |       |     |     |     |
-| live        | copilot      | +   | +     | +   | +   |     |
-| local       | kubernetes   |     |       |     |     |     |
-| live        | kubernetes   |     |       |     |     |     |
+| environment | cluster | orchestrator | dns | https | app | api | db  |
+| ----------- | ------- | ------------ | --- | ----- | --- | --- | --- |
+| dev         | local   | compose      | +   | -     |     |     |     |
+| local       | local   | compose      | +   | -     | +   | +   | +   |
+| demo        | local   | swarm        | +   |       | +   | +   | +   |
+| demo        | AWS EC2 | swarm        |     |       |     |     |     |
+| live        | AWS ECS | copilot      | +   | +     | +   | +   |     |
+| local       | local   | kubernetes   |     |       |     |     |     |
+| live        |         | kubernetes   |     |       |     |     |     |
 
 - [x] [Local deploy (Docker Compose)](./compose/README.md)
 - [x] [Local deploy (Docker Swarm)](./swarm/README.md)
