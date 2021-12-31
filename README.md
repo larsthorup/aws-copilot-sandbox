@@ -2,6 +2,16 @@
 
 Docker-based development environment and deployment pipeline
 
+| environment | orchestrator | dns | https | app | api | db  |
+| ----------- | ------------ | --- | ----- | --- | --- | --- |
+| dev         | compose      | +   | -     |     |     |     |
+| local       | compose      | +   | -     | +   | +   | +   |
+| local       | swarm        | +   |       | +   | +   | +   |
+| demo        | swarm        |     |       |     |     |     |
+| live        | copilot      | +   | +     | +   | +   |     |
+| local       | kubernetes   |     |       |     |     |     |
+| live        | kubernetes   |     |       |     |     |     |
+
 - [x] [Local deploy (Docker Compose)](./compose/README.md)
 - [x] [Local deploy (Docker Swarm)](./swarm/README.md)
 - [ ] [Demo deploy (Docker Swarm)](./swarm/README.md)
@@ -55,6 +65,7 @@ docker-compose up --build
 
 ## TODO
 
+- traefik: route to dashboard from `traefik.${BASE_DOMAIN}`
 - deploy demo environments on cloud hosted docker swarm on https://${STACK}.demo.greeter.xpqf.net
   - https://dockerswarm.rocks/
   - https://jennapederson.com/blog/2021/6/21/provisioning-an-ec2-instance-with-cloudformation-part-1/
@@ -68,7 +79,7 @@ docker-compose up --build
 - traefik: https
 - CI/CD Pipeline
 - e2e test of deployment
-- traefik: route tcp from `db.${STACK}.localhost` to service
+- traefik: route tcp from `db.${STACK}.${BASE_DOMAIN}` to service
 - traefik: network - create in docker-compose
 - traefik: up.sh: wait until healthy
 - prettify: yaml

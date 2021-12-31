@@ -12,6 +12,10 @@ docker stack deploy -c swarm/traefik/docker-compose.yml traefik
 docker service logs traefik_traefik
 ```
 
+```bash
+docker swarm leave --force
+```
+
 ## Build & deploy
 
 ```bash
@@ -29,5 +33,5 @@ docker stack rm greet
 - `services.*.depends_on` does not work when piping `config` to `stack`
   - Open fix: https://github.com/docker/cli/issues/2365
   - Workaround: https://github.com/docker/compose/issues/7773#issuecomment-886129165
-- traefik routes http from `{api,app}.${STACK}.localhost` to service
-- app references `api.${STACK}.localhost` instead of explicit port
+- traefik routes http from `{api,app}.${STACK}.${BASE_DOMAIN}` to service
+- app references `api.${STACK}.${BASE_DOMAIN}` instead of explicit port

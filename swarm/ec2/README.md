@@ -26,14 +26,14 @@ rm -rf ~/.ssh/greet-ec2-key.pem
 ## Create virtual machine with Ubuntu Linux
 
 ```bash
-aws cloudformation create-stack --stack-name greet-demo-ec2 --template-body file://ec2/ec2.cfn.yml
+aws cloudformation create-stack --stack-name greet-demo-ec2 --template-body file://swarm/ec2/ec2.cfn.yml
 aws cloudformation describe-stacks --stack-name greet-demo-ec2
 aws cloudformation describe-stack-events --stack-name greet-demo-ec2
 aws cloudformation describe-stack-resources --stack-name greet-demo-ec2
 aws cloudformation wait stack-create-complete --stack-name greet-demo-ec2
 ssh -i ~/.ssh/greet-ec2-key.pem ubuntu@demo.greeter.xpqf.net "uname -a"
-sh ec2/set-hostname.sh ~/.ssh/greet-ec2-key.pem
-sh ec2/upgrade-packages.sh ~/.ssh/greet-ec2-key.pem
+sh swarm/ec2/set-hostname.sh ~/.ssh/greet-ec2-key.pem
+sh swarm/ec2/upgrade-packages.sh ~/.ssh/greet-ec2-key.pem
 ```
 
 To delete the instance:
@@ -47,10 +47,19 @@ aws cloudformation wait stack-delete-complete --stack-name ${GREET_DEMO_STACK_ID
 ## Install Docker
 
 ```bash
-sh ec2/install-docker.sh ~/.ssh/greet-ec2-key.pem
+sh swarm/ec2/install-docker.sh ~/.ssh/greet-ec2-key.pem
+```
+
+## Install Traefik
+
+```bash
+sh swarm/ec2/install-traefik.sh ~/.ssh/greet-ec2-key.pem
 ```
 
 ## TODO
 
-- Traefik
-- HTTPS
+- traefik: access docker swarm remotely
+- traefik: secure remote docker swarm access
+- traefik: https
+- Amazon Linux and UserData?
+- {up,down}.sh

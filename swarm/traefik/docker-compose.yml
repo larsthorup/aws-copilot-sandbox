@@ -28,10 +28,6 @@ services:
       - target: 80
         published: 80
         mode: host
-  # whoami:
-  #   image: traefik/whoami
-  #   labels:
-  #     - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
 
 networks:
   # Use the previously created public network "traefik-public", shared with other

@@ -1,6 +1,9 @@
+set -e # exit when any command fails
+
 export STACK="$1"
-APP_ORIGIN="http://app.${STACK}.localhost"
-API_ORIGIN="http://api.${STACK}.localhost"
+export BASE_DOMAIN="localhost"
+APP_ORIGIN="http://app.${STACK}.${BASE_DOMAIN}"
+API_ORIGIN="http://api.${STACK}.${BASE_DOMAIN}"
 TEMP_DOTENV="swarm/temp/.env.${STACK}"
 TEMP_COMPOSE="swarm/temp/${STACK}.docker-compose.yml"
 mkdir -p swarm/temp
