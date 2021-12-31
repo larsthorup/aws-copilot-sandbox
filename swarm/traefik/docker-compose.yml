@@ -33,7 +33,7 @@ services:
         - "traefik.constraint-label=traefik-public"
         - "traefik.http.services.traefik.loadbalancer.server.port=8080"
         - "traefik.http.routers.api.entrypoints=web"
-        - "traefik.http.routers.api.rule=Host(`traefik.localhost`)"
+        - "traefik.http.routers.api.rule=Host(`traefik.${BASE_DOMAIN}`)"
         - "traefik.http.routers.api.service=api@internal"
 
 networks:

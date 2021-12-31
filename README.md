@@ -65,11 +65,11 @@ docker-compose up --build
 
 ## TODO
 
-- swarm/local directory to distinguish between swarm/ec2
 - deploy demo environments on cloud hosted docker swarm on https://${STACK}.demo.greeter.xpqf.net
   - https://dockerswarm.rocks/
   - https://jennapederson.com/blog/2021/6/21/provisioning-an-ec2-instance-with-cloudformation-part-1/
 - can we avoid a registry for demo environments?
+- swarm/local directory to distinguish between swarm/ec2
 - watch mode for Docker
   - https://stackoverflow.com/questions/26050899/how-to-mount-host-volumes-into-docker-containers-in-dockerfile-during-build
   - https://vsupalov.com/rebuilding-docker-image-development/

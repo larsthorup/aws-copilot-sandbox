@@ -1,7 +1,7 @@
 set -e # exit when any command fails
 
+export $(grep -v '^#' swarm/local/.env | xargs)
 export STACK="$1"
-export BASE_DOMAIN="localhost"
 APP_ORIGIN="http://app.${STACK}.${BASE_DOMAIN}"
 API_ORIGIN="http://api.${STACK}.${BASE_DOMAIN}"
 TEMP_DOTENV="swarm/temp/.env.${STACK}"
@@ -14,7 +14,7 @@ echo "DEPLOY_ENV=${STACK}-demo" >> $TEMP_DOTENV
 echo "APP_ORIGIN=${APP_ORIGIN}" >> $TEMP_DOTENV
 echo "API_ORIGIN=${API_ORIGIN}" >> $TEMP_DOTENV
 
-# Note: create docker-compose.yml file including dynamic info per stack
+# Note: create docker-compose.yml file including dynamic info per stack and environment
 docker-compose --project-directory . --env-file $TEMP_DOTENV -f swarm/docker-compose.yml config > $TEMP_COMPOSE 
 docker stack deploy --compose-file $TEMP_COMPOSE ${STACK}
 

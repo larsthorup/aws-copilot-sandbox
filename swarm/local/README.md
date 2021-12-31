@@ -7,12 +7,12 @@
 
 ```bash
 docker swarm init
-docker network create --driver=overlay traefik-public
-docker stack deploy -c swarm/traefik/docker-compose.yml traefik
+swarm/local/traefik-up.sh
 docker service logs traefik_traefik
 ```
 
 ```bash
+swarm/local/traefik-down.sh
 docker swarm leave --force
 ```
 
@@ -20,7 +20,7 @@ docker swarm leave --force
 
 ```bash
 docker-compose build
-swarm/up.sh greet
+swarm/local/up.sh greet
 docker stack list
 docker stack services greet
 docker service logs greet_api
