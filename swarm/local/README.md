@@ -13,19 +13,21 @@ Reverse proxy:
 
 ```bash
 swarm/local/traefik-up.sh
+http://traefik.localhost
 docker service logs traefik_traefik
 ```
 
 Registry
 
 ```bash
-docker stack deploy -c swarm/registry/docker-compose.yml registry
-docker service logs registry
+docker-compose -f swarm/registry/docker-compose.yml up -d
+docker logs registry_registry_1
 ```
 
 Teardown:
 
 ```bash
+docker-compose -f swarm/registry/docker-compose yml down
 swarm/local/traefik-down.sh
 docker swarm leave --force
 ```

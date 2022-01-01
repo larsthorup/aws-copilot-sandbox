@@ -65,13 +65,13 @@ docker-compose up --build
 
 ## TODO
 
-- registry: on swarm?
-- registry.localhost?
 - traefik: https (needed for registry)
 - registry: behind https
 - registry: authenticated
+- registry.localhost instead of localhost:5000
 - deploy demo environments on cloud hosted docker swarm on https://${STACK}.demo.greeter.xpqf.net
   - with a registry for demo environments?
+    - REGISTRY_HOST
     - TAG=latest
     - docker-compose build
     - docker-compose push
@@ -87,7 +87,7 @@ docker-compose up --build
     - docker stack deploy ${SWARM}
     - does not appear to be an option??
 - move /.env to compose/.env
-- root .env: ROOT_DOMAIN=greeter.xpqf.net
+- root .env: GREETER_HOST=greeter.xpqf.net
 - watch mode for Docker
   - https://stackoverflow.com/questions/26050899/how-to-mount-host-volumes-into-docker-containers-in-dockerfile-during-build
   - https://vsupalov.com/rebuilding-docker-image-development/

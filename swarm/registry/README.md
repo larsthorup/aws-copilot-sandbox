@@ -1,11 +1,5 @@
 # docker registry
 
-Install
-
-```bash
-docker-compose -f swarm/registry/docker-compose.yml up
-```
-
 Try it out:
 
 ```bash
