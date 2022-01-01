@@ -65,7 +65,6 @@ docker-compose up --build
 
 ## TODO
 
-- traefik: https (needed for registry)
 - registry: behind https
 - registry: authenticated
 - registry.localhost instead of localhost:5000
@@ -87,7 +86,8 @@ docker-compose up --build
     - docker stack deploy ${SWARM}
     - does not appear to be an option??
 - move /.env to compose/.env
-- root .env: GREETER_HOST=greeter.xpqf.net
+- swarm/.env: GREETER_HOST=greeter.xpqf.net
+- traefik: auth
 - watch mode for Docker
   - https://stackoverflow.com/questions/26050899/how-to-mount-host-volumes-into-docker-containers-in-dockerfile-during-build
   - https://vsupalov.com/rebuilding-docker-image-development/
@@ -98,7 +98,7 @@ docker-compose up --build
   - TAG=${COMMIT_SHA}
   - docker-compose build
 - e2e test of deployment
-- traefik: route tcp from `db.${STACK}.${BASE_DOMAIN}` to service
+- traefik: route tcp from `db.${STACK}.${SWARM_HOST}` to service
 - traefik: up.sh: wait until healthy
 - swarm: swarmpit - resource dashboard
 - swarm: swarmprom - monitoring and alerts

@@ -9,3 +9,5 @@ docker-compose --project-directory . --env-file swarm/$CLUSTER/.env -f swarm/tra
 
 docker network create --driver=overlay traefik-public
 docker stack deploy -c ${TEMP_COMPOSE} traefik
+
+echo traefik deployed to https://traefik.docker.localhost

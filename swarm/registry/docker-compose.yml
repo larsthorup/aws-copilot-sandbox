@@ -9,4 +9,4 @@ services:
     #     - "traefik.enable=true"
     #     - "traefik.constraint-label=traefik-public"
     #     - "traefik.http.services.registry.loadbalancer.server.port=5000"
-    #     - "traefik.http.routers.registry.rule=Host(`registry.${BASE_DOMAIN}`)"
+    #     - "traefik.http.routers.registry.rule=Host(`registry.${SWARM_HOST}`)"
