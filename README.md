@@ -7,7 +7,7 @@ Docker-based development environment and deployment pipeline
 | dev         | local   | compose      | +   | -     |     |     |     |
 | local       | local   | compose      | +   | -     | +   | +   | +   |
 | demo        | local   | swarm        | +   |       | +   | +   | +   |
-| demo        | AWS EC2 | swarm        |     |       |     |     |     |
+| demo        | AWS EC2 | swarm        | +   |       |     |     |     |
 | live        | AWS ECS | copilot      | +   | +     | +   | +   |     |
 | local       | local   | kubernetes   |     |       |     |     |     |
 | live        |         | kubernetes   |     |       |     |     |     |
@@ -65,22 +65,44 @@ docker-compose up --build
 
 ## TODO
 
+- registry: on swarm?
+- registry.localhost?
+- traefik: https (needed for registry)
+- registry: behind https
+- registry: authenticated
 - deploy demo environments on cloud hosted docker swarm on https://${STACK}.demo.greeter.xpqf.net
-  - https://dockerswarm.rocks/
-  - https://jennapederson.com/blog/2021/6/21/provisioning-an-ec2-instance-with-cloudformation-part-1/
-- can we avoid a registry for demo environments?
-- swarm/local directory to distinguish between swarm/ec2
+  - with a registry for demo environments?
+    - TAG=latest
+    - docker-compose build
+    - docker-compose push
+    - ssh ${SWARM} "docker stack deploy"
+    - docker image prune
+    - https://gabrieltanner.org/blog/docker-registry
+    - https://semaphoreci.com/community/tutorials/running-applications-on-a-docker-swarm-mode-cluster
+    - https://geek-cookbook.funkypenguin.co.nz/ha-docker-swarm/registry/
+  - build on demo
+    - ssh ${SWARM} "docker-compose build"
+    - not concurrency safe
+  - without a registry
+    - docker stack deploy ${SWARM}
+    - does not appear to be an option??
+- move /.env to compose/.env
+- root .env: ROOT_DOMAIN=greeter.xpqf.net
 - watch mode for Docker
   - https://stackoverflow.com/questions/26050899/how-to-mount-host-volumes-into-docker-containers-in-dockerfile-during-build
   - https://vsupalov.com/rebuilding-docker-image-development/
   - https://vsupalov.com/cache-docker-build-dependencies-without-volume-mounting/
 - Dev (watch) mode for app
 - Dev (watch) mode for api (nodemon?)
-- traefik: https
 - CI/CD Pipeline
+  - TAG=${COMMIT_SHA}
+  - docker-compose build
 - e2e test of deployment
 - traefik: route tcp from `db.${STACK}.${BASE_DOMAIN}` to service
 - traefik: up.sh: wait until healthy
+- swarm: swarmpit - resource dashboard
+- swarm: swarmprom - monitoring and alerts
+- swarm: swarm deployment dashboard - https://github.com/dockersamples/docker-swarm-visualizer
 - prettify: yaml
 - linting of infrastructure code files (docker-compose config)
   - https://github.com/replicatedhq/dockerfilelint

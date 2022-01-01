@@ -12,7 +12,7 @@ networks:
     external: true
 services:
   db:
-    image: postgres
+    image: postgres:14.1
     command: -p ${POSTGRES_PORT}
     volumes:
       - ./db/init:/docker-entrypoint-initdb.d
@@ -22,7 +22,7 @@ services:
     logging: *default-logging
 
   api:
-    image: xpqf_greeter_api
+    image: xpqf_greeter_api:${TAG}
     networks:
       - internal
       - traefik-public
@@ -36,7 +36,7 @@ services:
         - traefik.http.services.${STACK}_api.loadbalancer.server.port=${API_PORT}
         - "traefik.http.routers.${STACK}_api.rule=Host(`api.${STACK}.${BASE_DOMAIN}`)"
   app:
-    image: xpqf_greeter_app
+    image: xpqf_greeter_app:${TAG}
     networks:
       - traefik-public
     env_file: *default-env-file

@@ -7,9 +7,23 @@
 
 ```bash
 docker swarm init
+```
+
+Reverse proxy:
+
+```bash
 swarm/local/traefik-up.sh
 docker service logs traefik_traefik
 ```
+
+Registry
+
+```bash
+docker stack deploy -c swarm/registry/docker-compose.yml registry
+docker service logs registry
+```
+
+Teardown:
 
 ```bash
 swarm/local/traefik-down.sh
@@ -20,6 +34,8 @@ docker swarm leave --force
 
 ```bash
 docker-compose build
+docker login
+docker-compose push
 swarm/local/up.sh greet
 docker stack list
 docker stack services greet

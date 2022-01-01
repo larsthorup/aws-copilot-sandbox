@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  registry:
+    image: registry:2.7
+    ports:
+      - "5000:5000"
+    # deploy:
+    #   labels:
+    #     - "traefik.enable=true"
+    #     - "traefik.constraint-label=traefik-public"
+    #     - "traefik.http.services.registry.loadbalancer.server.port=5000"
+    #     - "traefik.http.routers.registry.rule=Host(`registry.${BASE_DOMAIN}`)"
