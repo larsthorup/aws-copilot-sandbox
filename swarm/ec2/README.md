@@ -14,6 +14,8 @@ Windows (Git Bash):
 export MSYS2_ARG_CONV_EXCL="*"
 ```
 
+## Create or import SSH key
+
 ```bash
 aws ec2 create-key-pair --key-name greet-ec2-key --query "KeyMaterial" --output text > ~/.ssh/greet-ec2-key.pem
 chmod 400 ~/.ssh/greet-ec2-key.pem
@@ -27,13 +29,19 @@ rm -rf ~/.ssh/greet-ec2-key.pem
 
 ```bash
 aws cloudformation create-stack --stack-name greet-demo-ec2 --template-body file://swarm/ec2/ec2.cfn.yml
-aws cloudformation describe-stacks --stack-name greet-demo-ec2
-aws cloudformation describe-stack-events --stack-name greet-demo-ec2
-aws cloudformation describe-stack-resources --stack-name greet-demo-ec2
 aws cloudformation wait stack-create-complete --stack-name greet-demo-ec2
 ssh -i ~/.ssh/greet-ec2-key.pem ubuntu@demo.greeter.xpqf.net "uname -a"
 swarm/ec2/set-hostname.sh ~/.ssh/greet-ec2-key.pem
 swarm/ec2/upgrade-packages.sh ~/.ssh/greet-ec2-key.pem
+```
+
+Status:
+
+```bash
+ssh -i ~/.ssh/greet-ec2-key.pem ubuntu@demo.greeter.xpqf.net "uname -a"
+aws cloudformation describe-stacks --stack-name greet-demo-ec2
+aws cloudformation describe-stack-events --stack-name greet-demo-ec2
+aws cloudformation describe-stack-resources --stack-name greet-demo-ec2
 ```
 
 To delete the instance:
@@ -56,10 +64,17 @@ swarm/ec2/docker-up.sh ~/.ssh/greet-ec2-key.pem
 swarm/ec2/traefik-up.sh ~/.ssh/greet-ec2-key.pem
 ```
 
+## Install Docker registry
+
+```bash
+swarm/ec2/registry-up.sh ~/.ssh/greet-ec2-key.pem
+```
+
 ## TODO
 
-- traefik: access docker swarm remotely
-- traefik: secure remote docker swarm access
+- traefik: auth
 - traefik: https
+- use docker context instead of ssh + bash?
+  - https://www.docker.com/blog/how-to-deploy-on-remote-docker-hosts-with-docker-compose/
 - Amazon Linux and UserData?
 - {up,down}.sh

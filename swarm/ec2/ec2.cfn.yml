@@ -68,7 +68,7 @@ Resources:
       HostedZoneName: xpqf.net.
       Name: "demo.greeter.xpqf.net."
       Type: A
-      TTL: "900"
+      TTL: "60"
       ResourceRecords:
         - !Sub ${GreetDemoEIP}
 
@@ -78,7 +78,7 @@ Resources:
       HostedZoneName: xpqf.net.
       Name: "*.demo.greeter.xpqf.net."
       Type: A
-      TTL: "900"
+      TTL: "60"
       ResourceRecords:
         - !Sub ${GreetDemoEIP}
 

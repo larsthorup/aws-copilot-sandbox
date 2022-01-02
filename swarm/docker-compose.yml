@@ -8,7 +8,7 @@ x-env-file:
 networks:
   internal:
     driver: overlay # Note: same as default network, defined explicitly for readability
-  traefik-public: # Use the previously created public network "traefik-public"
+  traefik-network:
     external: true
 services:
   db:
@@ -25,14 +25,14 @@ services:
     image: ${REGISTRY_PREFIX}xpqf_greeter_api:${TAG}
     networks:
       - internal
-      - traefik-public
+      - traefik-network
     env_file: *default-env-file
     logging: *default-logging
     deploy:
       labels:
         - "traefik.enable=true"
         - "traefik.constraint-label=traefik-public"
-        - "traefik.docker.network=traefik-public" # ensure that traefik picks the right network of the two
+        - "traefik.docker.network=traefik-network" # ensure that traefik picks the right network of the two
         # Route HTTP to HTTPS
         - "traefik.http.routers.${STACK}-api-http.entrypoints=http"
         - "traefik.http.routers.${STACK}-api-http.rule=Host(`${STACK}-api.${SWARM_HOST}`)"
@@ -45,7 +45,7 @@ services:
   app:
     image: ${REGISTRY_PREFIX}xpqf_greeter_app:${TAG}
     networks:
-      - traefik-public
+      - traefik-network
     env_file: *default-env-file
     logging: *default-logging
     deploy:

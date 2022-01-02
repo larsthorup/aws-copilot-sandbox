@@ -1,14 +1,12 @@
 version: "3.9"
 networks:
-  traefik-public:
+  traefik-network:
     external: true
 services:
   registry:
     image: registry:2.7
     networks:
-      - traefik-public
-    # ports:
-    #   - "5000:5000"
+      - traefik-network
     deploy:
       labels:
         - "traefik.enable=true"

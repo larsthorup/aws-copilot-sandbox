@@ -10,6 +10,9 @@ docker-compose --project-directory . --env-file swarm/$CLUSTER/.env -f swarm/tra
 
 scp -i $KEY $TEMP_COMPOSE ubuntu@demo.greeter.xpqf.net:.
 ssh -i $KEY ubuntu@demo.greeter.xpqf.net << EOF
-sudo docker network create --driver=overlay traefik-public
+sudo docker network create --driver=overlay traefik-network
 sudo docker stack deploy -c traefik.docker-compose.yml traefik
 EOF
+
+echo traefik deployed to https://traefik.demo.greeter.xpqf.net
+

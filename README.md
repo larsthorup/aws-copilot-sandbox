@@ -1,16 +1,16 @@
-# docker-sandbox
+# Deployment engineering with Docker
 
-Docker-based development environment and deployment pipeline
+Development environments and delivery pipelines for demo and live environments
 
-| environment | cluster | orchestrator | dns | https | app | api | db  |
-| ----------- | ------- | ------------ | --- | ----- | --- | --- | --- |
-| dev         | local   | compose      | +   | -     |     |     |     |
-| local       | local   | compose      | +   | -     | +   | +   | +   |
-| demo        | local   | swarm        | +   |       | +   | +   | +   |
-| demo        | AWS EC2 | swarm        | +   |       |     |     |     |
-| live        | AWS ECS | copilot      | +   | +     | +   | +   |     |
-| local       | local   | kubernetes   |     |       |     |     |     |
-| live        |         | kubernetes   |     |       |     |     |     |
+| environment | cluster | orchestrator | reg | dns | ssl | app | api | db  |
+| ----------- | ------- | ------------ | --- | --- | --- | --- | --- | --- |
+| dev         | local   | compose      | -   | -   | -   |     |     |     |
+| local       | local   | compose      | -   | -   | -   | +   | +   | +   |
+| demo        | local   | swarm        | +   | +   | +   | +   | +   | +   |
+| demo        | AWS EC2 | swarm        |     | +   |     |     |     |     |
+| live        | AWS ECS | copilot      |     | +   | +   | +   | +   |     |
+| local       | local   | kubernetes   |     |     |     |     |     |     |
+| live        |         | kubernetes   |     |     |     |     |     |     |
 
 - [x] [Local deploy (Docker Compose)](./compose/README.md)
 - [x] [Local deploy (Docker Swarm)](./swarm/README.md)
@@ -65,6 +65,8 @@ docker-compose up --build
 
 ## TODO
 
+- use docker secrets and configs for swarm-level secrets and configs (traefik certificates)
+  - https://github.com/heyValdemar/traefik-ssl-certificate-docker-swarm
 - deploy demo environments on cloud hosted docker swarm on https://${STACK}.${SWARM_HOST}
   - with a registry for demo environments?
     - REGISTRY_HOST
@@ -96,8 +98,10 @@ docker-compose up --build
   - TAG=${COMMIT_SHA}
   - docker-compose build
 - e2e test of deployment
+- EC2: Amazon Linux (over Ubuntu Linux) for better Cloudformation integration
 - traefik: route tcp from `db.${STACK}.${SWARM_HOST}` to service
 - traefik: up.sh: wait until healthy
+- registry: up.sh: wait until healthy
 - swarm: swarmpit - resource dashboard
 - swarm: swarmprom - monitoring and alerts
 - swarm: swarm deployment dashboard - https://github.com/dockersamples/docker-swarm-visualizer

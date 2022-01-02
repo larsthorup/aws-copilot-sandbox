@@ -36,9 +36,7 @@ services:
       - --api.insecure=true
 
     networks:
-      # Use the public network created to be shared between Traefik and
-      # any other service that needs to be publicly available with HTTPS
-      - traefik-public
+      - traefik-network
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./swarm/local/cert:/etc/cert
@@ -70,7 +68,5 @@ services:
         - "traefik.http.routers.api.service=api@internal"
 
 networks:
-  # Use the previously created public network "traefik-public", shared with other
-  # services that need to be publicly available via this Traefik
-  traefik-public:
+  traefik-network:
     external: true
