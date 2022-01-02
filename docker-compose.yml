@@ -8,7 +8,7 @@ x-env-file:
 services:
   db:
     container_name: db
-    image: postgres:14.1
+    image: ${REGISTRY_PREFIX}postgres:14.1
     command: -p ${POSTGRES_PORT}
     volumes:
       - ./db/init:/docker-entrypoint-initdb.d
@@ -19,7 +19,7 @@ services:
   api:
     container_name: api
     build: api
-    image: xpqf_greeter_api:latest
+    image: ${REGISTRY_PREFIX}xpqf_greeter_api:${TAG}
     ports:
       - "${API_PORT}:${API_PORT}"
     depends_on:
@@ -29,7 +29,7 @@ services:
   app:
     container_name: app
     build: app
-    image: xpqf_greeter_app:latest
+    image: ${REGISTRY_PREFIX}xpqf_greeter_app:${TAG}
     ports:
       - "${APP_PORT}:80"
     depends_on:

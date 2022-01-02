@@ -40,12 +40,15 @@ swarm/local/traefik-down.sh
 swarm/local/registry-down.sh
 ```
 
-## Build & deploy
+## Build and push
 
 ```bash
-docker-compose build
-docker login
-docker-compose push
+swarm/local/build.sh
+```
+
+## Deploy
+
+```bash
 swarm/local/up.sh greet
 docker stack list
 docker stack services greet

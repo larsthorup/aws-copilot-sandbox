@@ -65,7 +65,6 @@ docker-compose up --build
 
 ## TODO
 
-- registry: authenticated
 - deploy demo environments on cloud hosted docker swarm on https://${STACK}.${SWARM_HOST}
   - with a registry for demo environments?
     - REGISTRY_HOST
@@ -85,7 +84,8 @@ docker-compose up --build
     - does not appear to be an option??
 - move /.env to compose/.env
 - swarm/.env: GREETER_HOST=greeter.xpqf.net
-- traefik: auth
+- registry: authentication
+- traefik: authentication
 - watch mode for Docker
   - https://stackoverflow.com/questions/26050899/how-to-mount-host-volumes-into-docker-containers-in-dockerfile-during-build
   - https://vsupalov.com/rebuilding-docker-image-development/
