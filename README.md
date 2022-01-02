@@ -65,8 +65,6 @@ docker-compose up --build
 
 ## TODO
 
-- use docker secrets and configs for swarm-level secrets and configs (traefik certificates)
-  - https://github.com/heyValdemar/traefik-ssl-certificate-docker-swarm
 - deploy demo environments on cloud hosted docker swarm on https://${STACK}.${SWARM_HOST}
   - with a registry for demo environments?
     - REGISTRY_HOST
@@ -102,6 +100,8 @@ docker-compose up --build
 - traefik: route tcp from `db.${STACK}.${SWARM_HOST}` to service
 - traefik: up.sh: wait until healthy
 - registry: up.sh: wait until healthy
+- avoid "WARNING: Some services (traefik) use the 'configs' key, which will be ignored."
+  - use another template mechanism than `docker-compose config`
 - swarm: swarmpit - resource dashboard
 - swarm: swarmprom - monitoring and alerts
 - swarm: swarm deployment dashboard - https://github.com/dockersamples/docker-swarm-visualizer

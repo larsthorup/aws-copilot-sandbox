@@ -15,8 +15,8 @@ services:
       # Enable Docker Swarm mode
       - --providers.docker.swarmmode
 
-      # Point to dynamic config file
-      - --providers.file.filename=/etc/traefik/dynamic.yml
+      # Point to dynamic config file via docker config
+      - --providers.file.filename=/etc/traefik/configs/dynamic.yml
 
       # Create an entrypoint "http" listening on port 80
       - --entrypoints.http.address=:80
@@ -24,23 +24,44 @@ services:
       # Create an entrypoint "https" listening on port 443
       - --entrypoints.https.address=:443
 
+      # Wait for service to be up
+      # - "--ping=true"
+      # - "--ping.entrypoint=ping"
+      # - "--entryPoints.ping.address=:8082"
+
       # Enable the access log, with HTTP requests
       # - --accesslog
 
       # Enable the Traefik log, for configurations and errors
       - --log
-      # - --log.level=DEBUG
+      - --log.level=DEBUG
 
       # Enable the Dashboard and API
       - --api
       - --api.insecure=true
 
+    configs:
+      - source: traefik-config-dynamic.yml
+        target: /etc/traefik/configs/dynamic.yml
+
+    secrets:
+      - ssl-certificate-cert.pem
+      - ssl-certificate-key.pem
+
+    # healthcheck:
+    #   test: wget --spider http://localhost:8082/ping
+    #   test: curl --fail -s https://traefik.${SWARM_HOST}/ || exit 1
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 3
+    #   start_period: 5s
+
     networks:
       - traefik-network
+
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./swarm/local/cert:/etc/cert
-      - ./swarm/traefik/dynamic.yml:/etc/traefik/dynamic.yml
+
     ports:
       - target: 80
         published: 80
@@ -48,6 +69,7 @@ services:
       - target: 443
         published: 443
         mode: host
+
     deploy:
       labels:
         - "traefik.enable=true"
@@ -69,4 +91,15 @@ services:
 
 networks:
   traefik-network:
+    external: true
+
+configs:
+  traefik-config-dynamic.yml:
+    external: true
+
+secrets:
+  ssl-certificate-cert.pem:
+    external: true
+
+  ssl-certificate-key.pem:
     external: true

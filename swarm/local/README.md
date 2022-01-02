@@ -8,8 +8,8 @@
 
 ```bash
 mkcert -install # as root / administrator
-mkcert -cert-file swarm/local/cert/cert.pem -key-file swarm/local/cert/key.pem "docker.localhost" "*.docker.localhost"
-openssl x509 -in swarm/local/cert/cert.pem -text
+mkcert -cert-file swarm/local/cert/docker-localhost-cert.pem -key-file swarm/local/cert/docker-localhost-key.pem "docker.localhost" "*.docker.localhost"
+openssl x509 -in swarm/local/cert/docker-localhost-cert.pem -text
 docker swarm init
 ```
 
