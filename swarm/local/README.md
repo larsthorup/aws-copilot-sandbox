@@ -7,10 +7,16 @@
 - [mkcert](https://github.com/FiloSottile/mkcert)
 
 ```bash
-docker swarm init
 mkcert -install # as root / administrator
 mkcert -cert-file swarm/local/cert/cert.pem -key-file swarm/local/cert/key.pem "docker.localhost" "*.docker.localhost"
 openssl x509 -in swarm/local/cert/cert.pem -text
+docker swarm init
+```
+
+Add this line to `/etc/hosts` (on windows: `C:\Windows\System32\drivers\etc\hosts`):
+
+```
+127.0.0.1 registry.docker.localhost
 ```
 
 Reverse proxy:
@@ -23,16 +29,15 @@ docker service logs traefik_traefik
 Registry
 
 ```bash
-docker-compose -f swarm/registry/docker-compose.yml up -d
-docker logs registry_registry_1
+swarm/local/registry-up.sh
+docker service logs registry_registry
 ```
 
 Teardown:
 
 ```bash
-docker-compose -f swarm/registry/docker-compose yml down
 swarm/local/traefik-down.sh
-docker swarm leave --force
+swarm/local/registry-down.sh
 ```
 
 ## Build & deploy

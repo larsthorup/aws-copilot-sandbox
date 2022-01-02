@@ -65,10 +65,8 @@ docker-compose up --build
 
 ## TODO
 
-- registry: behind https
 - registry: authenticated
-- registry.localhost instead of localhost:5000
-- deploy demo environments on cloud hosted docker swarm on https://${STACK}.demo.greeter.xpqf.net
+- deploy demo environments on cloud hosted docker swarm on https://${STACK}.${SWARM_HOST}
   - with a registry for demo environments?
     - REGISTRY_HOST
     - TAG=latest
