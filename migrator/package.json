@@ -1,0 +1,10 @@
+{
+  "name": "xpqf-greeter-db",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "pg-promise": "^10.11.1"
+  }
+}

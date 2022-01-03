@@ -2,7 +2,7 @@
 
 Development environments and delivery pipelines for demo and live environments
 
-| environment | cluster | orchestrator | reg | dns | ssl | app | api | db  |
+| environment | cluster | orchestrator | reg | dns | ssl | app | api | mig |
 | ----------- | ------- | ------------ | --- | --- | --- | --- | --- | --- |
 | dev         | local   | compose      | -   | -   | -   |     |     |     |
 | local       | local   | compose      | -   | -   | -   | +   | +   | +   |
@@ -23,18 +23,21 @@ Services of the application
 
 - [x] [App (HTML web UI)](./app/README.md)
 - [x] [API (HTTP web service)](./api/README.md)
-- [x] DB (SQL database)
+- [x] [Migrator (SQL scripts)](./migrator/README.md)
 
 Supporting services
 
-- [x] DNS and certificate (HTTPS URL)
-- [x] Network (IP address, port)
-- [x] Logs
-- [ ] Secrets (hosting, certificate, db)
+- [x] Docker: stacks, containers, networking, logs, secrets, configs
+- [x] PostgreSQL: database
+- [x] Traefik: proxy, load balancing, SSL
+- [x] Docker Registry: container images
+- [x] DNS: AWS
+- [x] Virtual Machines: AWS
 
 Environments:
 
-- [x] local with watch
+- [ ] dev (local with watch mode)
+- [x] local
 - [x] demo
 - [x] live
 
@@ -57,6 +60,7 @@ Hosting providers:
 Scripting language:
 
 - [x] Bash, YML, Dockerfile, .env
+- [x] AWS Cloudformation
 - [ ] Terraform
 
 ```bash
@@ -65,6 +69,7 @@ docker-compose up --build
 
 ## TODO
 
+- split postgres image and migrator image to avoid having to build the sql into the db image
 - deploy demo environments on cloud hosted docker swarm on https://${STACK}.${SWARM_HOST}
   - with a registry for demo environments?
     - REGISTRY_HOST
@@ -98,6 +103,7 @@ docker-compose up --build
 - e2e test of deployment
 - EC2: Amazon Linux (over Ubuntu Linux) for better Cloudformation integration
 - traefik: route tcp from `db.${STACK}.${SWARM_HOST}` to service
+- pg: wait until healthy: https://stackoverflow.com/questions/35069027/docker-wait-for-postgresql-to-be-running
 - traefik: up.sh: wait until healthy
 - registry: up.sh: wait until healthy
 - avoid "WARNING: Some services (traefik) use the 'configs' key, which will be ignored."

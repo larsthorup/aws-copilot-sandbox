@@ -12,8 +12,6 @@ const corsOptions = {
 const app = express();
 app.use(cors(corsOptions));
 
-
-
 const cn = (() => {
   if (process.env.DB_SECRET) {
     const { username, host, dbname, password, port } = JSON.parse(process.env.DB_SECRET)
@@ -34,7 +32,6 @@ const cn = (() => {
     };
   }
 })();
-console.log(cn);
 const db = pgp(cn);
 
 app.get('/api/greet', async (req, res) => {
