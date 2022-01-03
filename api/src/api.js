@@ -32,6 +32,7 @@ const cn = (() => {
     };
   }
 })();
+// console.log(cn);
 const db = pgp(cn);
 
 app.get('/api/greet', async (req, res) => {

@@ -22,6 +22,7 @@ const cn = (() => {
     };
   }
 })();
+// console.log(cn);
 const db = pgp(cn);
 
 const main = async () => {

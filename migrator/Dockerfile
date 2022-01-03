@@ -9,4 +9,5 @@ COPY . .
 # Install dependencies
 RUN npm install
 
-CMD [ "npm", "start" ]
+# Wait until pg is running, then migrate
+CMD [ "sh", "-c", "sleep 5; npm start" ]

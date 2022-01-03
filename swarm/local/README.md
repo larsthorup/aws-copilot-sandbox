@@ -43,7 +43,7 @@ swarm/local/registry-down.sh
 ## Build and push
 
 ```bash
-swarm/local/build.sh
+  swarm/local/build.sh
 ```
 
 ## Deploy
