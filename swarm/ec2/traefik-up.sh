@@ -8,7 +8,7 @@ mkdir -p $TEMP_DIR
 TEMP_COMPOSE="$TEMP_DIR/traefik.docker-compose.yml"
 docker-compose --project-directory . --env-file swarm/$CLUSTER/.env -f swarm/traefik/docker-compose.yml config > $TEMP_COMPOSE 
 
-# docker secret create ssl-certificate-cert.pem swarm/$CLUSTER/docker-localhost-cert.pem
+# docker secret create ssl-certificate-cert.pem docker-localhost-cert.pem
 # docker secret create ssl-certificate-key.pem swarm/$CLUSTER/docker-localhost-key.pem
 # docker config create traefik-config-dynamic.yml swarm/traefik/dynamic.yml
 

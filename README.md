@@ -29,10 +29,12 @@ Supporting services
 
 - [x] Docker: stacks, containers, networking, logs, secrets, configs
 - [x] PostgreSQL: database
-- [x] Traefik: proxy, load balancing, SSL
+- [x] Traefik: proxy, load balancing, HTTPS
 - [x] Docker Registry: container images
 - [x] DNS: AWS
 - [x] Virtual Machines: AWS
+- [x] mkcert: SSL for local environment
+- [ ] Let's Encrypt: SSL for public (demo and live) environments
 
 Environments:
 
@@ -69,7 +71,7 @@ docker-compose up --build
 
 ## TODO
 
-- split postgres image and migrator image to avoid having to build the sql into the db image
+- Let's Encrypt for https for traefik in public swarm
 - deploy demo environments on cloud hosted docker swarm on https://${STACK}.${SWARM_HOST}
   - with a registry for demo environments?
     - REGISTRY_HOST
@@ -102,6 +104,7 @@ docker-compose up --build
   - docker-compose build
 - e2e test of deployment
 - EC2: Amazon Linux (over Ubuntu Linux) for better Cloudformation integration
+- docker: view logs also after container has crashed
 - traefik: route tcp from `db.${STACK}.${SWARM_HOST}` to service
 - pg: wait until healthy: https://stackoverflow.com/questions/35069027/docker-wait-for-postgresql-to-be-running
 - traefik: up.sh: wait until healthy

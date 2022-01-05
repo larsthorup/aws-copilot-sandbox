@@ -30,15 +30,29 @@ rm -rf ~/.ssh/greet-ec2-key.pem
 ```bash
 aws cloudformation create-stack --stack-name greet-demo-ec2 --template-body file://swarm/ec2/ec2.cfn.yml
 aws cloudformation wait stack-create-complete --stack-name greet-demo-ec2
+ssh-keygen -R demo.greeter.xpqf.net
+ssh-keyscan -H demo.greeter.xpqf.net >> ~/.ssh/known_hosts;
 ssh -i ~/.ssh/greet-ec2-key.pem ubuntu@demo.greeter.xpqf.net "uname -a"
 swarm/ec2/set-hostname.sh ~/.ssh/greet-ec2-key.pem
 swarm/ec2/upgrade-packages.sh ~/.ssh/greet-ec2-key.pem
+```
+
+SSL certificate:
+
+Note: AWS ACM certificates does not provide access to the private key, so they cannot be used with Traefik
+
+```bash
+# aws acm request-certificate --domain-name *.demo.greeter.xpqf.net --subject-alternative-names demo.greeter.xpqf.net --validation-method DNS
+# export SWARM_CERTIFICATE_ARN=$(aws acm list-certificates --query 'CertificateSummaryList[?DomainName==`*.demo.greeter.xpqf.net`].CertificateArn' --output text)
+# aws acm describe-certificate --certificate-arn ${SWARM_CERTIFICATE_ARN}
+# TODO: create DNS records
 ```
 
 Status:
 
 ```bash
 ssh -i ~/.ssh/greet-ec2-key.pem ubuntu@demo.greeter.xpqf.net "uname -a"
+aws cloudformation describe-stacks
 aws cloudformation describe-stacks --stack-name greet-demo-ec2
 aws cloudformation describe-stack-events --stack-name greet-demo-ec2
 aws cloudformation describe-stack-resources --stack-name greet-demo-ec2
