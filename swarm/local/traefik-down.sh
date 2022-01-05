@@ -1,7 +1,6 @@
 set -e # exit when any command fails
 
-docker stack rm traefik
-docker network rm traefik-network
-docker config rm traefik-config-dynamic.yml
-docker secret rm ssl-certificate-cert.pem
-docker secret rm ssl-certificate-key.pem
+docker stack rm traefik || true
+docker network rm traefik-network || true
+docker config rm traefik-config-dynamic.yml traefik-config-static.yml || true
+docker secret rm ssl-certificate-cert.pem ssl-certificate-key.pem || true

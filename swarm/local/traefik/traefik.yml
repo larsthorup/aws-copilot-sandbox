@@ -1,0 +1,2 @@
+# Note: no certificateResolvers needed locally, as Let's Encrypt cannot generate a certificate for use on localhost, so we use mkcert instead
+

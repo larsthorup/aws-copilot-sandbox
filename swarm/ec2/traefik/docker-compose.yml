@@ -1,0 +1,8 @@
+# Note: environment specific sections for traefik/docker-compose.yml
+
+# Note: no secrets injected into the Traefik docker service on EC2, as it will use Let's Encrypt to fetch a certificate automatically
+x-service-secrets: &service-secrets {}
+
+# Note: Use Let's Encrypt certificate resolver defined below
+x-deploy-labels: &deploy-labels
+  - "traefik.http.routers.traefik-public-https.tls.certresolver=le"

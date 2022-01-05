@@ -1,0 +1,10 @@
+# Create the certificate resolver "le" for Let's Encrypt
+certificatesResolvers:
+  le:
+    acme:
+      # Email address for sending certificate renewal notifications
+      email: ${EMAIL}
+      # Store the Let's Encrypt certificates in the mounted volume
+      storage: /certificates/acme.json
+      # Use the TLS Challenge for Let's Encrypt
+      tlsChallenge: true

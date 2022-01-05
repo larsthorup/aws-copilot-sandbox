@@ -75,7 +75,7 @@ swarm/ec2/docker-up.sh ~/.ssh/greet-ec2-key.pem
 ## Install Traefik
 
 ```bash
-swarm/ec2/traefik-up.sh ~/.ssh/greet-ec2-key.pem
+EMAIL=your@email.tld swarm/ec2/traefik-up.sh ~/.ssh/greet-ec2-key.pem
 ```
 
 ## Install Docker registry

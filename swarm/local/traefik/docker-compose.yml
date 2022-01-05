@@ -1,0 +1,14 @@
+# Note: environment specific sections for traefik/docker-compose.yml
+
+x-service-secrets: &service-secrets
+  - ssl-certificate-cert.pem
+  - ssl-certificate-key.pem
+
+x-tls-label: &tls-label "traefik.http.routers.traefik-public-https.tls=true"
+
+secrets:
+  ssl-certificate-cert.pem:
+    external: true
+
+  ssl-certificate-key.pem:
+    external: true

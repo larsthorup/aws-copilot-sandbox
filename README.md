@@ -29,8 +29,8 @@ Supporting services
 
 - [x] Docker: stacks, containers, networking, logs, secrets, configs
 - [x] PostgreSQL: database
-- [x] Traefik: proxy, load balancing, HTTPS
-- [x] Docker Registry: container images
+- [x] [Traefik: proxy, load balancing, HTTPS](./swarm/traefik/README.md)
+- [x] [Docker Registry: container images](./swarm/registry/README.md)
 - [x] DNS: AWS
 - [x] Virtual Machines: AWS
 - [x] mkcert: SSL for local environment
@@ -71,6 +71,7 @@ docker-compose up --build
 
 ## TODO
 
+- Merge into traefik-dynamic-config.yml
 - Let's Encrypt for https for traefik in public swarm
 - deploy demo environments on cloud hosted docker swarm on https://${STACK}.${SWARM_HOST}
   - with a registry for demo environments?

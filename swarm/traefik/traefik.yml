@@ -1,0 +1,42 @@
+providers:
+  # Enable Docker in Traefik, so that it reads labels from Docker services
+  docker:
+    # Enable Docker Swarm mode
+    swarmMode: true
+
+    # Do not expose all Docker services, only the ones explicitly exposed
+    exposedByDefault: false
+
+    # Add a constraint to only mount services with the label "traefik.constraint-label=traefik-public"
+    constraints: Label(`traefik.constraint-label`, `traefik-public`)
+
+  file:
+    # Point to dynamic config file via docker config
+    filename: /etc/traefik/configs/dynamic.yml
+
+entryPoints:
+  http:
+    address: ":80"
+
+  https:
+    address: ":443"
+
+  ping:
+    address: ":8082"
+
+# Wait for service to be up
+# ping:
+#   entryPoint: ping
+
+# Enable the access log, with HTTP requests
+accessLog: true
+
+# Enable the Traefik log, for configurations and errors
+log:
+  # level: INFO
+  level: DEBUG
+
+# Enable the Dashboard and API
+api:
+  dashboard: true
+  insecure: true
