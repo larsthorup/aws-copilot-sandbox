@@ -88,6 +88,7 @@ swarm/ec2/registry-up.sh ~/.ssh/greet-ec2-key.pem
 ## Teardown
 
 ```bash
+swarm/ec2/registry-down.sh ~/.ssh/greet-ec2-key.pem
 swarm/ec2/traefik-down.sh ~/.ssh/greet-ec2-key.pem
 ```
 

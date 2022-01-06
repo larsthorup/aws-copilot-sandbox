@@ -1,0 +1,3 @@
+# Note: environment specific sections for registry/docker-compose.yml
+
+x-tls-label: &tls-label "traefik.http.routers.registry.tls=true"

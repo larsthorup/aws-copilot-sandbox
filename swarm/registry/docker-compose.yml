@@ -15,6 +15,6 @@ services:
         # Route HTTPS to service
         - "traefik.http.routers.registry.entrypoints=https"
         - "traefik.http.routers.registry.rule=Host(`registry.${SWARM_HOST}`)"
-        - "traefik.http.routers.registry.tls=true"
+        - *tls-label
         - "traefik.http.routers.registry.service=registry"
         - "traefik.http.services.registry.loadbalancer.server.port=5000"
