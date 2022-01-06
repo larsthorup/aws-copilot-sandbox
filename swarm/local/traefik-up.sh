@@ -5,7 +5,6 @@ CLUSTER=local
 TEMP_DIR=swarm/$CLUSTER/temp
 mkdir -p $TEMP_DIR
 TEMP_COMPOSE="$TEMP_DIR/traefik.docker-compose.yml"
-
 cat \
   swarm/$CLUSTER/traefik/docker-compose.yml \
   swarm/traefik/docker-compose.yml \

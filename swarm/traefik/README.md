@@ -5,3 +5,4 @@
   - Cannot use Let's Encrypt on local swarm (cannot validate DNS)
 - Cannot use YAML anchors in traefik dynamic config
   - so to inject different tls config for local and ec2 we put that config in docker-compose which DO support anchors
+- Inject email for Let's Encrypt into static config via envsubst

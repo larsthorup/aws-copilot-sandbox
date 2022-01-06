@@ -76,6 +76,7 @@ swarm/ec2/docker-up.sh ~/.ssh/greet-ec2-key.pem
 
 ```bash
 EMAIL=your@email.tld swarm/ec2/traefik-up.sh ~/.ssh/greet-ec2-key.pem
+ssh -i ~/.ssh/greet-ec2-key.pem ubuntu@demo.greeter.xpqf.net "sudo docker service logs traefik_traefik"
 ```
 
 ## Install Docker registry
@@ -84,10 +85,15 @@ EMAIL=your@email.tld swarm/ec2/traefik-up.sh ~/.ssh/greet-ec2-key.pem
 swarm/ec2/registry-up.sh ~/.ssh/greet-ec2-key.pem
 ```
 
+## Teardown
+
+```bash
+swarm/ec2/traefik-down.sh ~/.ssh/greet-ec2-key.pem
+```
+
 ## TODO
 
 - traefik: auth
-- traefik: https
 - use docker context instead of ssh + bash?
   - https://www.docker.com/blog/how-to-deploy-on-remote-docker-hosts-with-docker-compose/
 - Amazon Linux and UserData?

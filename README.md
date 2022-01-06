@@ -71,7 +71,6 @@ docker-compose up --build
 
 ## TODO
 
-- Let's Encrypt for https for traefik in public swarm
 - deploy demo environments on cloud hosted docker swarm on https://${STACK}.${SWARM_HOST}
   - with a registry for demo environments?
     - REGISTRY_HOST
