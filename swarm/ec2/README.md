@@ -63,6 +63,7 @@ To delete the instance:
 ```bash
 GREET_DEMO_STACK_ID=$(aws cloudformation describe-stacks --stack-name greet-demo-ec2 --query 'Stacks[0].StackId' --output text)
 aws cloudformation delete-stack --stack-name greet-demo-ec2
+echo Deleting stack ${GREET_DEMO_STACK_ID}...
 aws cloudformation wait stack-delete-complete --stack-name ${GREET_DEMO_STACK_ID}
 ```
 
@@ -90,6 +91,7 @@ swarm/ec2/registry-up.sh ~/.ssh/greet-ec2-key.pem
 ```bash
 swarm/ec2/registry-down.sh ~/.ssh/greet-ec2-key.pem
 swarm/ec2/traefik-down.sh ~/.ssh/greet-ec2-key.pem
+swarm/ec2/down.sh
 ```
 
 ## TODO

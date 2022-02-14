@@ -2,6 +2,8 @@
 
 Development environments and delivery pipelines for demo and live environments
 
+![](./doc/deployment-engineering.png)
+
 | environment | cluster | orchestrator | reg | dns | ssl | app | api | mig |
 | ----------- | ------- | ------------ | --- | --- | --- | --- | --- | --- |
 | dev         | local   | compose      | -   | -   | -   |     |     |     |
@@ -125,3 +127,4 @@ docker-compose up --build
 - app: vite bundler
 - Metrics for build time / deploy time / watch CPU usage
 - Deploy to Kubernetes
+- can we use envsubst more?
